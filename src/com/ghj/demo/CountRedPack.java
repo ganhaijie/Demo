@@ -20,17 +20,16 @@ public class CountRedPack implements Runnable {
 
     @Override
     public void run() {
-        while (!Thread.currentThread().isInterrupted()) {
             UserPack userPack = null;
             try {
                 Thread.sleep(new Random(5000).nextInt(5000));
                 userPack = userPacks.take();
             } catch (InterruptedException e) {
-                break;
+                e.printStackTrace();
             }
             System.out.println(name + "抢到了-->" + userPack.getName()+"红包"+userPack.getMoney()+"元");
             userPacks.remove(userPack);
             latch.countDown();
-        }
+
     }
 }
